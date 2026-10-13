@@ -52,6 +52,24 @@ Os dados ficam na pasta `dados/` (banco `yukaer.db` e documentos em `dados/arqui
 
 Mantenha **uma única instância** (sem escalar horizontalmente): o banco é um arquivo SQLite em `/home/data`. Para muitas centenas de usuários simultâneos, o próximo passo seria trocar para Azure SQL.
 
+## Publicar num VPS com Docker e Caddy
+
+Serve para um servidor que já tem outro sistema rodando em Docker com um proxy Caddy cuidando do HTTPS (como o VPS da Hostinger). A plataforma sobe num container próprio, `yukaer-negociacao`, ligado à rede do Caddy, e os dados ficam no volume `dados`.
+
+1. Aponte o subdomínio (registro A) para o IP do servidor.
+2. No servidor: `git clone git@github.com:flavioagro/yukaer-negociacao.git /opt/yukaer-negociacao && cd /opt/yukaer-negociacao`
+3. `cp .env.example .env` e ajuste `URL_BASE`, `EMAILS_MESA` e, se for usar e-mail, `SMTP_*`. Se a rede do Caddy não se chamar `kaffatec_default`, acrescente `REDE_PROXY=<nome da rede>` ao `.env`.
+4. `docker compose up -d --build`
+5. No Caddyfile do proxy, acrescente o bloco abaixo e recarregue o Caddy (`docker exec <container do caddy> caddy reload --config /etc/caddy/Caddyfile`):
+   ```
+   negociacao.seudominio.com.br {
+       reverse_proxy yukaer-negociacao:3000
+   }
+   ```
+6. Primeiro administrador: `docker compose exec web npm run criar-admin -- seu.email@yukaer.com.br "Seu Nome"`
+7. Atualizar depois de mudanças no código: `git pull && docker compose up -d --build`
+8. Backup: `docker run --rm -v yukaer-negociacao_dados:/data -v /root/backups:/b alpine tar czf /b/yukaer-$(date +%F).tgz -C /data .`
+
 ## Backup
 
 - Ative **Backups** no App Service (inclui a pasta `/home`), ou

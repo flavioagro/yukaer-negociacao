@@ -1,0 +1,19 @@
+# Sobe a plataforma ao lado de um proxy Caddy já existente (rede externa REDE_PROXY).
+services:
+  web:
+    build: .
+    container_name: yukaer-negociacao
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - dados:/data
+    networks:
+      - proxy
+
+volumes:
+  dados:
+
+networks:
+  proxy:
+    external: true
+    name: ${REDE_PROXY:-kaffatec_default}

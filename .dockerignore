@@ -1,0 +1,6 @@
+node_modules
+dados
+.git
+.env
+test
+*.zip
