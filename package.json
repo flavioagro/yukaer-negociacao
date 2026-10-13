@@ -1,0 +1,21 @@
+{
+  "name": "yukaer-negociacao",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Plataforma de negociação Yukaer Agro: boletas de compra dos corretores, aprovação da mesa comercial e controle de contratos.",
+  "main": "server/index.js",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch server/index.js",
+    "criar-admin": "node --disable-warning=ExperimentalWarning scripts/criar-admin.js",
+    "importar-controle": "node --disable-warning=ExperimentalWarning scripts/importar-controle.js",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/*.test.js\""
+  },
+  "dependencies": {
+    "exceljs": "4.4.0",
+    "express": "5.1.0",
+    "multer": "2.0.2",
+    "nodemailer": "7.0.6"
+  }
+}

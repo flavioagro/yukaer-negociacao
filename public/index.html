@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mesa de Negociação Yukaer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <div class="brand"><b>YUKAER AGRO</b><span>Mesa de Negociação · Compras de grãos</span></div>
+    <span class="who" id="who"></span>
+    <button class="btn sm" id="sair" type="button" hidden>Sair</button>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+</header>
+<div class="wrap">
+  <main id="main"><p class="muted" style="margin-top:24px">Carregando…</p></main>
+</div>
+<div id="overlay"></div>
+<div id="toast" class="toast" hidden></div>
+<script src="regras.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
