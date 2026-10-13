@@ -1,0 +1,8 @@
+node_modules/
+dados/
+.env
+*.db
+*.db-*
+*.xlsm
+*.xlsx
+*.csv
